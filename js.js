@@ -1,65 +1,64 @@
-function add(){
-    const container = document.getElementById('container');
-    var rows = document.querySelectorAll('.grade-container');
-    const lastRow = rows[rows.length - 1];
-    const button = lastRow.querySelector('.add');
-    button.remove();
-    var lastIndex = parseFloat(lastRow.dataset.index);
-    lastRow.insertAdjacentHTML(
-        'beforeend', 
-        `<button class="col-auto remove" onclick="remove(${lastIndex})"><i class="bi bi-x"></i></button>`
-    );
-    console.log(lastIndex);
-    lastIndex++;
-    console.log(lastIndex);
-    container.insertAdjacentHTML(
-        'beforeend', 
-        `<div class=" row grade-container" data-index=${lastIndex}>
-            <div class="col-auto">
-                <label class="col-form-label-sm">UNITS</label>
-                <input type="number" class="col-form-control units" min="1" oninput="getGWA()"> 
-                <!--<input type="number" class="col-form-control units" min="1"> -->
-            </div>
-            <div class="col-auto">
-                <label class="col-form-label-sm">GRADES</label>
-                <input type="text" class="col-form-control grades" oninput="getGWA()">
-                <!--<input type="text" class="col-form-control grades"> -->
-            </div>
-            <button class="col-auto add " onclick="add()"><i class="bi bi-plus-square"></i></button>
-        </div>`
-    ); 
-}
-
 // function add(){
 //     const container = document.getElementById('container');
 //     var rows = document.querySelectorAll('.grade-container');
 //     const lastRow = rows[rows.length - 1];
+//     const button = lastRow.querySelector('.add');
+//     button.remove();
 //     var lastIndex = parseFloat(lastRow.dataset.index);
+//     lastRow.insertAdjacentHTML(
+//         'beforeend', 
+//         `<button class="col-auto remove" onclick="remove(${lastIndex})"><i class="bi bi-x"></i></button>`
+//     );
+//     console.log(lastIndex);
 //     lastIndex++;
+//     console.log(lastIndex);
 //     container.insertAdjacentHTML(
 //         'beforeend', 
 //         `<div class=" row grade-container" data-index=${lastIndex}>
 //             <div class="col-auto">
-//                 <label class="col-form-label-sm">UNITS</label>
+//                 <label class="col-form-label-lg">UNITS</label>
 //                 <input type="number" class="col-form-control units" min="1" oninput="getGWA()"> 
 //                 <!--<input type="number" class="col-form-control units" min="1"> -->
 //             </div>
 //             <div class="col-auto">
-//                 <label class="col-form-label-sm">GRADES</label>
+//                 <label class="col-form-label-lg">GRADES</label>
 //                 <input type="text" class="col-form-control grades" oninput="getGWA()">
 //                 <!--<input type="text" class="col-form-control grades"> -->
 //             </div>
-//             <button class="col-auto remove" onclick="remove(${lastIndex})"><i class="bi bi-x"></i></button>
+//             <button class="col-auto add " onclick="add()"><i class="bi bi-plus-square"></i></button>
 //         </div>`
-//     );
+//     ); 
 // }
+
+function add(){
+    const container = document.getElementById('container');
+    var rows = document.querySelectorAll('.grade-container');
+    const lastRow = rows[rows.length - 1];
+    var lastIndex = parseFloat(lastRow.dataset.index);
+    lastIndex++;
+    container.insertAdjacentHTML(
+        'beforeend', 
+        `<div class=" row grade-container" data-index=${lastIndex}>
+            <div class="col-auto">
+                <label class="col-form-label-lg">UNITS</label>
+                <input type="number" class="col-form-control units" min="1" oninput="getGWA()"> 
+                <!--<input type="number" class="col-form-control units" min="1"> -->
+            </div>
+            <div class="col-auto">
+                <label class="col-form-label-lg">GRADES</label>
+                <input type="number" class="col-form-control grades" oninput="getGWA()">
+                <!--<input type="number" class="col-form-control grades"> -->
+            </div>
+            <button class="btn btn-danger btn-sm remove" onclick="remove(${lastIndex})"><i class="bi bi-x"></i></button>
+        </div>`
+    );
+}
 
 
 function remove(id){
     const rows = document.querySelectorAll('.grade-container');
     for(let i=0; i < rows.length; i++){
         let row = rows[i];
-        console.log(id);
         if(row.dataset.index == id){
             row.remove();
             getGWA();
@@ -92,7 +91,7 @@ function getGWA(){
         let grade = parseFloat(grades[i].value) || 0;
         if(grade > 0) {
             gwa += (grade * unit) / totalUnits;
-            document.getElementById('gwa').innerHTML = gwa.toFixed(2);
+            document.getElementById('gwa').innerHTML = gwa.toFixed(4);
         }
         
     }
